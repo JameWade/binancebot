@@ -32,3 +32,16 @@ build/
 ### VS Code ###
 .vscode/
 !/.idea/
+.idea/libraries/Maven__org_projectlombok_lombok_1_18_20.xml
+.idea/libraries/Maven__org_reactivestreams_reactive_streams_1_0_3.xml
+.idea/libraries/Maven__org_seleniumhq_selenium_selenium_api_4_0_0.xml
+.idea/libraries/Maven__org_seleniumhq_selenium_selenium_chrome_driver_4_0_0.xml
+.idea/libraries/Maven__org_seleniumhq_selenium_selenium_chromium_driver_4_0_0.xml
+.idea/libraries/Maven__org_ow2_asm_asm_commons_5_0_3.xml
+.idea/libraries/Maven__org_ow2_asm_asm_tree_5_0_3.xml
+.idea/libraries/Maven__org_ow2_asm_asm_util_5_0_3.xml
+.idea/libraries/Maven__org_seleniumhq_selenium_selenium_devtools_v85_4_0_0.xml
+.idea/libraries/Maven__org_seleniumhq_selenium_selenium_devtools_v93_4_0_0.xml
+.idea/libraries/Maven__org_seleniumhq_selenium_selenium_devtools_v94_4_0_0.xml
+.idea/libraries/Maven__org_seleniumhq_selenium_selenium_devtools_v95_4_0_0.xml
+.idea/libraries/Maven__org_seleniumhq_selenium_selenium_edge_driver_4_0_0.xml

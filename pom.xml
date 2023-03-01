@@ -27,7 +27,7 @@
         <spring-cloud-context.version>2.2.5.RELEASE</spring-cloud-context.version>
 
         <!--netty、web3j-->
-        <netty-all.version>4.1.35.Final</netty-all.version>
+
         <web3j.version>4.3.0</web3j.version>
         <crypto.version>5.0.0</crypto.version>
 
@@ -75,37 +75,6 @@
             <artifactId>playwright</artifactId>
             <version>1.28.1</version>
         </dependency>
-        <!--lib-util-->
-        <dependency>
-            <groupId>com.seven.bot</groupId>
-            <artifactId>lib-util</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-
-        <!--lib-database-->
-        <dependency>
-            <groupId>com.seven.bot</groupId>
-            <artifactId>lib-database</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-
-        <!--lib-entity-->
-        <dependency>
-            <groupId>com.seven.bot</groupId>
-            <artifactId>lib-entity</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-
-        <!--lib-exception-->
-        <dependency>
-            <groupId>com.seven.bot</groupId>
-            <artifactId>lib-exception</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-
         <!--spring-boot-starter-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -130,13 +99,6 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
-        <!--netty依赖-->
-        <dependency>
-            <groupId>io.netty</groupId>
-            <artifactId>netty-all</artifactId>
-            <version>${netty-all.version}</version>
-        </dependency>
-
         <!--WEB3J依赖-->
         <dependency>
             <groupId>org.web3j</groupId>
@@ -154,12 +116,6 @@
             <groupId>ch.obermuhlner</groupId>
             <artifactId>big-math</artifactId>
             <version>${big-math.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.seven.bot</groupId>
-            <artifactId>lib-redis</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
         </dependency>
 
         <!--spring-boot-starter-jdbc-->
@@ -180,13 +136,6 @@
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>${mybatis-plus-boot-starter.version}</version>
-        </dependency>
-
-        <!--lib-swagger-->
-        <dependency>
-            <groupId>com.seven.bot</groupId>
-            <artifactId>lib-swagger</artifactId>
-            <version>1.0-SNAPSHOT</version>
         </dependency>
 
         <!--entity中Data依赖-->
@@ -217,11 +166,6 @@
             <version>4.9.0</version>
         </dependency>
         <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>1.2.76</version>
-        </dependency>
-        <dependency>
             <groupId>jakarta.validation</groupId>
             <artifactId>jakarta.validation-api</artifactId>
             <version>2.0.2</version>
@@ -246,12 +190,6 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-        </dependency>
-
-        <!--redis相关依赖-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
         <!--commons-pool2-->
