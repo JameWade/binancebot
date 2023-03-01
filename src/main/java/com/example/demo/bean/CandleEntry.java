@@ -1,15 +1,13 @@
 package com.example.demo.bean;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.math.BigDecimal;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
 @ToString
 public class CandleEntry {
     private String startTime;                                // k线开盘时间

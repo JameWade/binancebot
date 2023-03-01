@@ -20,7 +20,7 @@ public class SymbolConfig {
     //获取BN所有交易对的api路径
     public static String pricePath = "/ticker/price";
 
-    //获取BN某交易对近100条收盘数据
+    //获取BN某交易对近1000条收盘数据
     public static String klinesPath = "/klines";
 
 

@@ -1,9 +1,6 @@
 package com.example.demo.bean;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -11,6 +8,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
 @ToString
 public class CandleEntryList {
     private String symbol;//交易对昵称
