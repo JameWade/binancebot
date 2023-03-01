@@ -2,7 +2,7 @@ package com.example.demo.bean;
 
 import java.math.BigDecimal;
 
-public class CandleEntry {
+public class CandleEntryCandleEntry {
     String startTime;                                // k线开盘时间
     BigDecimal openingPrice;                              // 开盘价
     BigDecimal highestPrice;                              // 最高价
