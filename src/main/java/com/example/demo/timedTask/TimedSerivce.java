@@ -7,25 +7,21 @@ import com.example.demo.bean.CandleEntryList;
 import com.example.demo.bean.Result;
 import com.example.demo.common.okhttp.OkHttpUtils;
 import com.example.demo.common.utils.IndicatorUtils;
+import com.example.demo.common.utils.SpringUtils;
 import com.example.demo.config.InitConfig;
 import com.example.demo.config.SymbolConfig;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Service
 @Slf4j
-@Component
 public class TimedSerivce {
-
-    @Autowired
-    ComeputeService comeputeService;
 
     /**
      * 两个小时更新一次
@@ -105,7 +101,9 @@ public class TimedSerivce {
             }
             resultList.add(IndicatorUtils.getEXPMA(symbol,candleEntries));
         }
-       SymbolConfig.full_data = comeputeService.compute_ema30(resultList);
+        ComeputeService comeputeService = SpringUtils.getBean(ComeputeService.class);
+        List<HashMap<String, BigDecimal>> hashMaps = comeputeService.compute_ema30(resultList);
+        SymbolConfig.full_data = hashMaps;
     }
 
 }

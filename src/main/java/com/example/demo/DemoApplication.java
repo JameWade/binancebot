@@ -11,9 +11,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-@SpringBootApplication(exclude={DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
+import java.util.Arrays;
+import java.util.List;
+
+@SpringBootApplication(scanBasePackages = "com.example.demo",exclude={DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
 @EnableScheduling
 @Slf4j
 public class DemoApplication {
@@ -22,8 +26,10 @@ public class DemoApplication {
         SpringApplication.run(DemoApplication.class, args);
 
         //初始化交易对
-        InitConfig.init();
+        //InitConfig.init();
         //打印已存在的交易对
+        List<String> list = Arrays.asList("BNBBUSD", "BTCBUSD", "XRPBUSD");
+        SymbolConfig.martket_tickers = list;
         log.info(SymbolConfig.martket_tickers + "");
         log.info(SymbolConfig.martket_tickers.size() + "");
 
