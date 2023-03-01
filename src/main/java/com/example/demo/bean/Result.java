@@ -1,12 +1,16 @@
 package com.example.demo.bean;
 
-import lombok.Data;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
+@Builder
+@ToString
 public class Result {
     private String symbol;//交易对昵称
     List<BigDecimal> listEMA;              ///ema30 近三日结果

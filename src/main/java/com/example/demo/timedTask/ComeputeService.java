@@ -13,15 +13,17 @@ import java.util.Map;
 @Service
 @Slf4j
 public class ComeputeService {
-    public List<HashMap<String, BigDecimal>>  compute_ema30(List<Result> list) {
-        List<HashMap<String, BigDecimal>>   symbolList = new ArrayList<>(); //map is symbol:ema30
-        for (Result result:list) {
-            if (result.compare()){
+
+    public List<HashMap<String, BigDecimal>> compute_ema30(List<Result> list) {
+        List<HashMap<String, BigDecimal>> symbolList = new ArrayList<>(); //map is symbol:ema30
+        for (Result result : list) {
+            if (result.compare()) {
                 HashMap<String, BigDecimal> map = new HashMap<String, BigDecimal>();
-                map.put(result.getSymbol(),result.getListEMA().get(2));
+                map.put(result.getSymbol(), result.getListEMA().get(2));
                 symbolList.add(map);
             }
         }
         return symbolList;
     }
+
 }

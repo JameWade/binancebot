@@ -4,11 +4,15 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.example.demo.bean.CandleEntry;
 import com.example.demo.bean.CandleEntryList;
+import com.example.demo.bean.Result;
 import com.example.demo.common.okhttp.OkHttpUtils;
+import com.example.demo.common.utils.IndicatorUtils;
 import com.example.demo.config.InitConfig;
 import com.example.demo.config.SymbolConfig;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -17,14 +21,17 @@ import java.util.List;
 
 @Service
 @Slf4j
+@Component
 public class TimedSerivce {
 
+    @Autowired
+    ComeputeService comeputeService;
 
     /**
      * 两个小时更新一次
      * @throws Exception
      */
-    @Scheduled(cron = "0 15 0/2 * * ?")
+    @Scheduled(cron = "0 0 12 * * ?")
     public void update_market_code() throws Exception {
         try {
             InitConfig.init();
@@ -35,8 +42,9 @@ public class TimedSerivce {
     }
 
     /**
-     * 定时更新
+     * 定时更新 交易对的1000条收盘数据
      */
+    @Scheduled(cron = "0 0 0/2 * * ?")
     public void get_historical_data(){
         String klinesUrl = SymbolConfig.baseUrl + SymbolConfig.klinesPath;
 
@@ -79,4 +87,25 @@ public class TimedSerivce {
         //更新交易对最新1000条收盘数据
         SymbolConfig.candleEntryLists = candleData;
     }
+
+    /**
+     * 定时 填写响应数据 进过ema处理
+     */
+    @Scheduled(cron = "0 0/30 * * * ? ")
+    public void data_input(){
+        List<Result> resultList = new ArrayList<>();
+        List<CandleEntryList> list =  SymbolConfig.candleEntryLists;
+        for(int i = 0 ; i < list.size() ; i++){
+            CandleEntryList candleEntryList = list.get(i);
+            String symbol = candleEntryList.getSymbol();
+            List<CandleEntry> candleEntries = candleEntryList.getCandleEntries();
+            //数据源小于5 不作处理
+            if(candleEntries.size() < 5){
+                continue;
+            }
+            resultList.add(IndicatorUtils.getEXPMA(symbol,candleEntries));
+        }
+       SymbolConfig.full_data = comeputeService.compute_ema30(resultList);
+    }
+
 }
