@@ -19,7 +19,7 @@ public class ReadController {
 
     /**
      * <p>
-     * 关闭交易  http://52.221.187.128:18001/v1/calculation/set?open=false
+     * 关闭交易  127.0.0.1:8993/v1/strong_coin
      */
     @GetMapping("strong_coin")
     public JsonResponse<Object> dj() {
