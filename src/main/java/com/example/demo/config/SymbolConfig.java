@@ -4,6 +4,7 @@ import com.example.demo.bean.CandleEntry;
 import com.example.demo.bean.CandleEntryList;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -18,6 +19,9 @@ public class SymbolConfig {
 
     //处理好的全数据
     public static List<HashMap<String, Object>> full_data;
+
+    //过滤无用交易对
+    public static List<String> blacklist = Arrays.asList("PAXBUSD","RAMPBUSD");
 
     //币安请求路由
     public static String baseUrl = "https://api3.binance.com/api/v3";

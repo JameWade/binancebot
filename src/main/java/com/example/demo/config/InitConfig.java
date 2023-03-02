@@ -10,6 +10,8 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
+
 
 /**
  * 初始化交易对
@@ -44,7 +46,8 @@ public class InitConfig {
             log.error("初始化交易对失败");
             throw new Exception("初始化交易对失败");
         }
-        SymbolConfig.martket_tickers = martket_tickers;
+        //差集 白名单集合 (市场集合 - 黑名单)
+        SymbolConfig.martket_tickers = martket_tickers.stream().filter(item -> !SymbolConfig.blacklist.contains(item)).collect(toList());
     }
 
     public static void main(String[] args) {

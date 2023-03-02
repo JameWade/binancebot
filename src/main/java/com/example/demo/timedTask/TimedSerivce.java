@@ -15,9 +15,10 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 @Service
 @Slf4j
@@ -44,10 +45,8 @@ public class TimedSerivce {
     public void get_historical_data(){
         try{
             String klinesUrl = SymbolConfig.baseUrl + SymbolConfig.klinesPath;
-
-            List<String> martket_tickers =  SymbolConfig.martket_tickers;
+            List<String> martket_tickers = SymbolConfig.martket_tickers;
             List<CandleEntryList> candleData = new ArrayList<>();
-
             for(int i = 0 ; i < martket_tickers.size() ; i++){
                 String symbolName = martket_tickers.get(i);
                 List<CandleEntry> candles = new ArrayList<>();
@@ -115,4 +114,5 @@ public class TimedSerivce {
             log.error("{} 更新cryptos 失败：{}",LocalDateTime.now(),e.getMessage());
         }
     }
+
 }
