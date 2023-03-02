@@ -1,10 +1,6 @@
 package com.example.demo.common.utils;
 
 import com.alibaba.fastjson.JSONArray;
-import com.binance.api.client.api.sync.BinanceApiSpotRestClient;
-import com.binance.api.client.domain.market.Candlestick;
-import com.binance.api.client.domain.market.CandlestickInterval;
-import com.binance.api.client.factory.BinanceSpotApiClientFactory;
 import com.example.demo.bean.CandleEntry;
 import com.example.demo.bean.Result;
 import com.example.demo.config.SymbolConfig;
@@ -45,8 +41,8 @@ public class IndicatorUtils {
             BigDecimal endPrice = list.get(i).getEndPrice();
             // 第二天以后，当天收盘 收盘价乘以系数再加上昨天EMA乘以系数-1
             ema = endPrice.multiply(k).add(ema.multiply((BigDecimal.ONE.subtract(k))));
-            //保存后三天的值
-            if (total - i <= 3) {
+            //保存后四天的值
+            if (total - i <= 4) {
                 emas.add(ema.setScale(8,RoundingMode.DOWN));
                 prices.add(endPrice.setScale(8,RoundingMode.DOWN));
             }
@@ -264,9 +260,9 @@ public class IndicatorUtils {
         }
     }
 
-    public static void main4(String[] args) {
-        BinanceSpotApiClientFactory factory = BinanceSpotApiClientFactory.newInstance("LXyty1nDerKp0x9QRMXcW9YCsCbgv0h9HGxNb8C5Ysj7ov6rrSoBSGmjNrOs67Xo",
-                "gZeHmJiRlsbZ8dMgkRIHxkgSGfQLpQOf0vQFRwmsLJ4YOlrqlK6Zrky7SnakvCvk",
+/*    public static void main4(String[] args) {
+        BinanceSpotApiClientFactory factory = BinanceSpotApiClientFactory.newInstance("",
+                "",
                 "https://api3.binance.com",
                 "wss://stream.binance.com:9443"
 
@@ -289,7 +285,7 @@ public class IndicatorUtils {
         //ParabolicSarIndicator sarIndicator = new ParabolicSarIndicator(series);
         //EMAIndicator avg14 = new EMAIndicator(closePrice, 14);
 
-    }
+    }*/
 
     public static void main(String[] args) {
 

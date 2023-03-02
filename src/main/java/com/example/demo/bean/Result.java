@@ -14,13 +14,14 @@ public class Result {
 
     public boolean compare() {
         boolean flag = true;
-        for (int i = 0; i < 3; i++) {
+        for (int i = 1; i < 4; i++) {
             if (this.listPrice.get(i).compareTo(this.listEMA.get(i)) < 0) {
                 flag = false;
             }
         }
         if (this.listPrice.get(1).compareTo(this.listPrice.get(0)) < 0 ||
-                this.listPrice.get(2).compareTo(this.listPrice.get(1)) < 0) {
+                this.listPrice.get(2).compareTo(this.listPrice.get(1)) < 0 ||
+                    this.listPrice.get(3).compareTo(this.listPrice.get(2)) < 0) {
             flag = false;
         }
         return flag;

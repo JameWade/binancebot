@@ -102,7 +102,7 @@ public class TimedSerivce {
                 String symbol = candleEntryList.getSymbol();
                 List<CandleEntry> candleEntries = candleEntryList.getCandleEntries();
                 //数据源小于5 不作处理
-                if(candleEntries.size() < 5){
+                if(candleEntries.size() < 30){
                     continue;
                 }
                 resultList.add(IndicatorUtils.getEXPMA(symbol,candleEntries));

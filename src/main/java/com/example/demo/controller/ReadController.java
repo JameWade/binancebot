@@ -23,7 +23,11 @@ public class ReadController {
      */
     @GetMapping("cryptos")
     public JsonResponse<Object> dj() {
-        return JsonResponse.success("获取数据成功", SymbolConfig.full_data);
+        if(SymbolConfig.full_data == null || SymbolConfig.full_data.isEmpty()){
+            return JsonResponse.success("获取数据成功", "啊哦，没有符合的交易数据，建议去彬哥的交易所！");
+        }else {
+            return JsonResponse.success("获取数据成功", SymbolConfig.full_data);
+        }
     }
 
     /**
