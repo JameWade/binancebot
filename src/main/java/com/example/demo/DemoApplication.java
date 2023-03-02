@@ -26,10 +26,10 @@ public class DemoApplication {
         SpringApplication.run(DemoApplication.class, args);
 
         //初始化交易对
-        //InitConfig.init();
+        InitConfig.init();
         //打印已存在的交易对
-        List<String> list = Arrays.asList("BNBBUSD", "BTCBUSD", "XRPBUSD");
-        SymbolConfig.martket_tickers = list;
+        //List<String> list = Arrays.asList("BNBBUSD", "BTCBUSD", "XRPBUSD");
+        //SymbolConfig.martket_tickers = list;
         log.info(SymbolConfig.martket_tickers + "");
         log.info(SymbolConfig.martket_tickers.size() + "");
 

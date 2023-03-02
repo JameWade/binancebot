@@ -17,7 +17,7 @@ public class SymbolConfig {
     public static List<CandleEntryList> candleEntryLists;
 
     //处理好的全数据
-    public static List<HashMap<String, BigDecimal>> full_data;
+    public static List<HashMap<String, Object>> full_data;
 
     //币安请求路由
     public static String baseUrl = "https://api3.binance.com/api/v3";

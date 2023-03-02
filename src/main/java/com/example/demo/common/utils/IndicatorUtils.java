@@ -1,9 +1,19 @@
 package com.example.demo.common.utils;
 
 import com.alibaba.fastjson.JSONArray;
+import com.binance.api.client.api.sync.BinanceApiSpotRestClient;
+import com.binance.api.client.domain.market.Candlestick;
+import com.binance.api.client.domain.market.CandlestickInterval;
+import com.binance.api.client.factory.BinanceSpotApiClientFactory;
 import com.example.demo.bean.CandleEntry;
 import com.example.demo.bean.Result;
 import com.example.demo.config.SymbolConfig;
+import org.ta4j.core.BarSeries;
+import org.ta4j.core.BaseTradingRecord;
+import org.ta4j.core.Strategy;
+import org.ta4j.core.TradingRecord;
+import org.ta4j.core.indicators.EMAIndicator;
+import org.ta4j.core.indicators.ParabolicSarIndicator;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -32,10 +42,9 @@ public class IndicatorUtils {
         BigDecimal k = new BigDecimal("2").divide(new BigDecimal(SymbolConfig.cycle).add(BigDecimal.ONE),4, RoundingMode.DOWN);// 计算出序数
         BigDecimal ema = list.get(0).getEndPrice();// 第一天ema等于当天收盘价
         for (int i = 1; i < list.size(); i++) {
-            total--;
             BigDecimal endPrice = list.get(i).getEndPrice();
             // 第二天以后，当天收盘 收盘价乘以系数再加上昨天EMA乘以系数-1
-            ema = endPrice.multiply(k).add(ema).multiply((BigDecimal.ONE.subtract(k)));
+            ema = endPrice.multiply(k).add(ema.multiply((BigDecimal.ONE.subtract(k))));
             //保存后三天的值
             if (total - i <= 3) {
                 emas.add(ema.setScale(8,RoundingMode.DOWN));
@@ -56,14 +65,15 @@ public class IndicatorUtils {
         BigDecimal ema = list.get(0);// 第一天ema等于当天收盘价
         for (int i = 1; i < list.size(); i++) {
             // 第二天以后，当天收盘 收盘价乘以系数再加上昨天EMA乘以系数-1
-            ema = list.get(i).multiply(k).add(ema).multiply((BigDecimal.ONE.subtract(k)));
+            ema = list.get(i).multiply(k).add(ema.multiply((BigDecimal.ONE.subtract(k))));
             System.out.println(ema);
             /**
-             * 105.61795000
-             * 116.907517225000
-             * 133.5028823639875000
-             * 155.06182145151030625000
-             * 181.264183967887891496875000
+             * 0.0645
+             * 106.4500
+             * 118.93397500
+             * 137.062733612500
+             * 160.4721872944937500
+             * 188.82173121399890312500
              */
         }
 
@@ -93,7 +103,7 @@ public class IndicatorUtils {
 
     }
 
-    public static void main(String[] args) {
+    public static void main3(String[] args) {
         String str  ="[\n" +
                 "    [\n" +
                 "        1676851200000,\n" +
@@ -252,5 +262,37 @@ public class IndicatorUtils {
             ema = list.get(i) * k + ema * (1 - k);
             System.out.println(ema);
         }
+    }
+
+    public static void main4(String[] args) {
+        BinanceSpotApiClientFactory factory = BinanceSpotApiClientFactory.newInstance("LXyty1nDerKp0x9QRMXcW9YCsCbgv0h9HGxNb8C5Ysj7ov6rrSoBSGmjNrOs67Xo",
+                "gZeHmJiRlsbZ8dMgkRIHxkgSGfQLpQOf0vQFRwmsLJ4YOlrqlK6Zrky7SnakvCvk",
+                "https://api3.binance.com",
+                "wss://stream.binance.com:9443"
+
+        );
+        BinanceApiSpotRestClient client = factory.newRestClient();
+        List<Candlestick> candlesticks = client.getCandlestickBars("BNBBUSD", CandlestickInterval.DAILY);
+        System.out.println(candlesticks);
+        int size = candlesticks.size();
+        int index = 7;
+        if(size > 30){
+            if(size > 200){
+                index = 90;
+            }
+        }else{
+           return;
+        }
+        BarSeries barSeries = BinanceTa4jUtil.convertToBarSeries(candlesticks.subList(0, candlesticks.size() - index), "BNBBUSD", CandlestickInterval.DAILY.getIntervalId());
+        Strategy strategy = BinanceTa4jUtil.buildStrategy(barSeries, "EMA");
+        TradingRecord tradingRecord = new BaseTradingRecord();
+        //ParabolicSarIndicator sarIndicator = new ParabolicSarIndicator(series);
+        //EMAIndicator avg14 = new EMAIndicator(closePrice, 14);
+
+    }
+
+    public static void main(String[] args) {
+
+
     }
 }

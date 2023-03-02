@@ -14,12 +14,13 @@ import java.util.Map;
 @Slf4j
 public class ComeputeService {
 
-    public List<HashMap<String, BigDecimal>> compute_ema30(List<Result> list) {
-        List<HashMap<String, BigDecimal>> symbolList = new ArrayList<>(); //map is symbol:ema30
+    public List<HashMap<String, Object>> compute_ema30(List<Result> list) {
+       String label = "今日的EMA(30)价格在：";
+        List<HashMap<String, Object>> symbolList = new ArrayList<>(); //map is symbol:ema30
         for (Result result : list) {
             if (result.compare()) {
-                HashMap<String, BigDecimal> map = new HashMap<String, BigDecimal>();
-                map.put(result.getSymbol(), result.getListEMA().get(2));
+                HashMap<String, Object> map = new HashMap<>();
+                map.put(result.getSymbol(), label + result.getListEMA().get(2));
                 symbolList.add(map);
             }
         }

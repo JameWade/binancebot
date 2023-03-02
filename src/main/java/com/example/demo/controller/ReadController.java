@@ -21,8 +21,17 @@ public class ReadController {
      * <p>
      * 关闭交易  127.0.0.1:8993/v1/strong_coin
      */
-    @GetMapping("strong_coin")
+    @GetMapping("cryptos")
     public JsonResponse<Object> dj() {
         return JsonResponse.success("获取数据成功", SymbolConfig.full_data);
+    }
+
+    /**
+     * <p>
+     * 关闭交易  127.0.0.1:8993/v1/busd_martket
+     */
+    @GetMapping("busd_martket")
+    public JsonResponse<Object> busd_martket() {
+        return JsonResponse.success("获取数据成功", SymbolConfig.martket_tickers);
     }
 }
